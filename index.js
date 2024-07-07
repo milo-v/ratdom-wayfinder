@@ -162,7 +162,6 @@ let edges_to_add = [
 ]
 
 function findPath() {
-    location.reload()
     const start = document.getElementById('start').value
     const end = document.getElementById('end').value
     const door533 = document.getElementById('door533').checked
@@ -188,10 +187,15 @@ function findPath() {
     const path = shortestPath(graph, start, end)
     console.log(path)
 
+    const resultElement = document.getElementById('result')
+    while (resultElement.hasChildNodes()) {
+        resultElement.removeChild(resultElement.firstChild)
+    }
+
     for (let map of path) {
         const mapElement = document.createElement('p')
         mapElement.textContent = map
-        document.getElementById('result').appendChild(mapElement)
+        resultElement.appendChild(mapElement)
     }
 }
 
