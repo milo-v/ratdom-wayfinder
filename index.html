@@ -1,4 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <body><p>Hello</p></body>
+    <head>
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <label for="start">Start: </label>
+        <input type="text" id="start">
+        <label for="end">End: </label>
+        <input type="text" id="end">
+        <label for="door533">Door 533 opened: </label>
+        <input type="checkbox" id="door533">
+        <label for="door545">Door 545 opened: </label>
+        <input type="checkbox" id="door545">
+        <button onclick="findPath()">Find path</button>
+        <h3 id="result">Path: </h3>
+    </body>
 </html>
