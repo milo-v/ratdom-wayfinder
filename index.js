@@ -162,6 +162,7 @@ let edges_to_add = [
 ]
 
 function findPath() {
+    location.reload()
     const start = document.getElementById('start').value
     const end = document.getElementById('end').value
     const door533 = document.getElementById('door533').checked
