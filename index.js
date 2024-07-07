@@ -177,7 +177,7 @@ function findPath() {
     let graph = {}
 
     // Xây dựng đồ thị từ danh sách cạnh
-    for (let [a, b] of edges) {
+    for (let [a, b] of edges_to_add) {
         if (!graph[a]) graph[a] = [];
         if (!graph[b]) graph[b] = [];
         graph[a].push(b);
