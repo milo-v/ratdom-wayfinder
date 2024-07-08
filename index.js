@@ -177,11 +177,11 @@ function findPath() {
     let graph = {}
 
     // Xây dựng đồ thị từ danh sách cạnh
-    for (let [a, b] of edges_to_add) {
-        if (!graph[a]) graph[a] = [];
-        if (!graph[b]) graph[b] = [];
-        graph[a].push(b);
-        graph[b].push(a); // Đồ thị vô hướng
+    for (let [a, b, direction] of edges_to_add) {
+        if (!graph[a]) graph[a] = {};
+        if (!graph[b]) graph[b] = {};
+        graph[a][b] = direction;
+        graph[b][a] = 9 - direction; // Đồ thị vô hướng
     }
 
     const path = shortestPath(graph, start, end)
@@ -206,7 +206,7 @@ function shortestPath(graph, startNode, endNode) {
     }
 
     // Queue lưu trữ các đỉnh cần duyệt
-    let queue = [[startNode, []]]; // Mỗi phần tử là [node, path]
+    let queue = [[startNode, [], 0]]; // Mỗi phần tử là [node, path, totalWeight]
 
     // Set lưu trữ các đỉnh đã duyệt
     let visited = new Set();
@@ -217,15 +217,17 @@ function shortestPath(graph, startNode, endNode) {
 
         // Kiểm tra nếu currentNode là đích
         if (currentNode === endNode) {
-            return currentPath;
+            return {
+                path: currentPath,
+            };
         }
 
-        // Duyệt các đỉnh kề với currentNode
-        for (let neighbor of graph[currentNode]) {
+        // Duyệt các đỉnh kề với currentNode và thêm vào queue
+        for (let neighbor in graph[currentNode]) {
             if (!visited.has(neighbor)) {
                 // Đánh dấu đỉnh này đã duyệt và thêm vào queue
                 visited.add(neighbor);
-                queue.push([neighbor, [...currentPath, [currentNode, neighbor]]]);
+                queue.push([neighbor, [...currentPath, { from: currentNode, to: neighbor, direction: graph[currentNode][neighbor] }]]);
             }
         }
     }
