@@ -1,5 +1,5 @@
 let edges_to_add = [
-    ['ratdom_maze1', 'ratdom_maze2'], 
+    ['ratdom_maze1', 'ratdom_maze2'],
     ['ratdom_maze2', 'ratdom_maze3'],
     ['ratdom_maze2', 'ratdom_maze_448'],
     ['ratdom_maze3', 'ratdom_bwm1'],
@@ -181,6 +181,7 @@ function findPath() {
         if (!graph[a]) graph[a] = {};
         if (!graph[b]) graph[b] = {};
         graph[a][b] = direction;
+        if (direction == 9) continue
         graph[b][a] = 9 - direction; // Đồ thị vô hướng
     }
 
@@ -193,8 +194,40 @@ function findPath() {
     }
 
     for (let map of path) {
+        let direction
+        switch (map.direction) {
+            case 1:
+                direction = 'northwest'
+                break
+            case 2:
+                direction = 'north'
+                break
+            case 3:
+                direction = 'northeast'
+                break
+            case 4:
+                direction = 'east'
+                break
+            case 5:
+                direction = 'southeast'
+                break
+            case 6:
+                direction = 'south'
+                break
+            case 7:
+                direction = 'southwest'
+                break
+            case 8:
+                direction = 'west'
+                break
+            case 9:
+                direction = 'down'
+                break
+            default:
+                direction = 'unknown'
+        }
         const mapElement = document.createElement('p')
-        mapElement.textContent = map
+        mapElement.textContent = map.from + ' -> ' + map.to + ', ' + direction
         resultElement.appendChild(mapElement)
     }
 }
