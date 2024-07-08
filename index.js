@@ -217,9 +217,7 @@ function shortestPath(graph, startNode, endNode) {
 
         // Kiểm tra nếu currentNode là đích
         if (currentNode === endNode) {
-            return {
-                path: currentPath,
-            };
+            return currentPath
         }
 
         // Duyệt các đỉnh kề với currentNode và thêm vào queue
