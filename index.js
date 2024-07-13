@@ -161,6 +161,14 @@ let edges_to_add = [
     ['ratdom_maze_616_up', 'ratdom_maze_705', 1]
 ]
 
+function setStart(value) {
+    document.getElementById('start').value = value;
+}
+
+function setEnd(value) {
+    document.getElementById('end').value = value;
+}
+
 function findPath() {
     const start = document.getElementById('start').value
     const end = document.getElementById('end').value
